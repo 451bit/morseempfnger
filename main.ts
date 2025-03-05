@@ -1,3 +1,13 @@
+input.onButtonEvent(Button.A, input.buttonEventValue(ButtonEvent.LongClick), function () {
+    if (zustand == "") {
+        zustand = "T"
+    }
+})
+input.onButtonEvent(Button.A, input.buttonEventValue(ButtonEvent.Click), function () {
+    if (zustand == "") {
+        zustand = "e"
+    }
+})
 input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
     if (modus == 0) {
         modus = 1
@@ -10,25 +20,16 @@ radio.onReceivedString(function (receivedString) {
         basic.showString(receivedString)
     }
 })
+let zustand = ""
 let modus = 0
 modus = 0
-let zustand = ""
+zustand = ""
 radio.setTransmitPower(7)
 basic.forever(function () {
     if (modus == 0) {
         basic.setLedColor(0x00ff00)
-        radio.sendString("T")
-        basic.showString("T")
-        basic.pause(500)
-        radio.sendString("e")
-        basic.showString("e")
-        basic.pause(500)
-        radio.sendString("s")
-        basic.showString("s")
-        basic.pause(500)
-        radio.sendString("t")
-        basic.showString("t")
-        basic.pause(500)
+        radio.sendString(zustand)
+        zustand = ""
     } else {
         basic.setLedColor(0x0000ff)
     }
